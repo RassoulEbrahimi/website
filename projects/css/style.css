@@ -26,6 +26,7 @@ html {
 body {
     background: var(--bg-color);
     color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
 }
 
 .header {
@@ -87,7 +88,7 @@ section {
     display: flex;
     align-items: center;
     padding: 0 9%;
-    background: url('/images/home.jpg') no-repeat;
+
     background-size: cover;
     background-position: center;
 }
@@ -697,27 +698,13 @@ span {
 }
 
 /* ANIMATION RELOAD AND SCROLL */
-.animate {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-color);
-    z-index: 98;
-}
+
 
 .animate.home-img {
     width: 50%;
 }
 
-.logo .animate,
-.navbar .animate,
-#menu-icon .animate,
-.home.show-animate .animate {
-    animation: showRight 1s ease forwards;
-    animation-delay: calc(.3s * var(--i));
-}
+
 
 .animate.scroll {
     transition: 1s ease;
@@ -775,7 +762,21 @@ section:nth-child(odd) .animate.scroll,
     }
 }
 
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
+    .text-content,
+    .text-box,
+    .video-container {
+        width: 100%; /* تنظیم عرض به 100% در صفحه‌های کوچک */
+        flex: 1 1 100%; /* Stacks the divs on smaller screens */
+        margin-right: 0;
+        margin-bottom: 20px; /* Space between stacked items */
+    }
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
     .header {
         background: var(--bg-color);
     }
@@ -838,6 +839,22 @@ section:nth-child(odd) .animate.scroll,
         pointer-events: none;
         background: var(--bg-color);
         opacity: .6;
+    }
+
+
+
+
+    .text-box {
+        background-color: #112e42;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 
+            0 3.2px 2.2px rgba(0, 0, 0, 0.02),
+            0 7.6px 5.3px rgba(0, 0, 0, 0.028),
+            0 14.4px 10px rgba(0, 0, 0, 0.035),
+            0 25.7px 17.9px rgba(0, 0, 0, 0.042),
+            0 48px 33.4px rgba(0, 0, 0, 0.05),
+            0 115px 80px rgba(0, 0, 0, 0.07);
     }
 }
 
@@ -1045,5 +1062,111 @@ section:nth-child(odd) .animate.scroll,
 .details-content p,
 .details-content ul li {
     font-size: 1.2em; /* Change the font size here */
+}
+
+
+
+
+.text-box {
+    padding: 20px;
+    margin-top: 3rem;
+    background-color: #112e42;
+    align-self: flex-start; /* انتقال به سمت چپ */
+    border: .2rem solid var(--main-color);
+    border-radius: 10px; /* گرد کردن گوشه‌ها */
+    font-size: 1.8rem; /* Adjust the font size as needed */
+    box-shadow: 
+        0 3.2px 2.2px rgba(0, 0, 0, 0.02),
+        0 7.6px 5.3px rgba(0, 0, 0, 0.028),
+        0 14.4px 10px rgba(0, 0, 0, 0.035),
+        0 25.7px 17.9px rgba(0, 0, 0, 0.042),
+        0 48px 33.4px rgba(0, 0, 0, 0.05),
+        0 115px 80px rgba(0, 0, 0, 0.07);
+}
+
+.text-box h1, .text-box p {
+    margin: 0 0 20px 0; /* تنظیم فاصله بین عناصر */
+}
+
+
+
+
+.banner {
+    width: 100%;
+    height: 20%;
+    border: .2rem solid var(--main-color);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 
+    0 3.2px 2.2px rgba(0, 0, 0, 0.02),
+    0 7.6px 5.3px rgba(0, 0, 0, 0.028),
+    0 14.4px 10px rgba(0, 0, 0, 0.035),
+    0 25.7px 17.9px rgba(0, 0, 0, 0.042),
+    0 48px 33.4px rgba(0, 0, 0, 0.05),
+    0 115px 80px rgba(0, 0, 0, 0.07);
+  }
+  
+  
+  .banner img {
+    height : 100%;
+    width: 100%;
+    border-radius: 10px;
+    max-width: 100%;
+}
+
+
+
+
+
+
+/* Video container styling */
+.video-container {
+    width: 100%; /* تنظیم عرض به 100% در صفحه‌های کوچک */
+    flex: 1 1 48%; /* Takes up 48% width with flexible resizing */
+    box-sizing: border-box;
+    border: 2px solid #58a6ff;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex; /* Ensures the video fills the container */
+    align-items: center; /* Centers the video vertically */
+    justify-content: center; /* Centers the video horizontally */
+    padding: 0; /* Remove any padding */
+    margin-bottom: 20px; /* فاصله بین کادرها در حالت استک شده */
+}
+
+video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+
+/* Container to hold both text and video divs */
+.project-content {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    justify-content: space-between;
+    margin: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Text content styling */
+.text-content {
+    margin-right: 2%; /* Space between text and video */
+    box-sizing: border-box; /* Ensures padding and border are included in width */
+    font-size: 1.8rem; /* Adjust the font size as needed */
+    line-height: 1.5; /* Adjust the line height for better readability */
+}
+
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between; /* فاصله بین کادرها */
+    width: 80%; /* عرض کلی برای متن و ویدیو */
+    margin-bottom: 20px;
 }
 
