@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <!-- header design -->
+    <header class="header">
+        <a href="https://rassoulebrahimi.github.io/website/" class="logo">RSL. </a>
+
+        <nav class="navbar">
+            <a href="https://rassoulebrahimi.github.io/website/">Home</a>
+            <a href="https://rassoulebrahimi.github.io/website/#about">About</a>
+            <a href="https://rassoulebrahimi.github.io/website/#education">Education</a>
+            <a href="https://rassoulebrahimi.github.io/website/#skills">Skills</a>
+            <a href="https://rassoulebrahimi.github.io/website/#contact">Contact</a>
+            <a href="https://rassoulebrahimi.github.io/website/projects/project.html">Project</a>
+
+            
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h1>Unit Converter</h1>
+        <div class="converter">
+            <label for="inputValue">Enter Value:</label>
+            <input type="number" id="inputValue" placeholder="Enter value">
+
+            <label for="unitType">Select Conversion Type:</label>
+            <select id="unitType">
+                <option value="length">Length</option>
+                <option value="weight">Weight</option>
+                <option value="temperature">Temperature</option>
+            </select>
+
+            <div id="lengthUnits" class="unit-options">
+                <label for="fromLengthUnit">From:</label>
+                <select id="fromLengthUnit">
+                    <option value="meters">Meters</option>
+                    <option value="kilometers">Kilometers</option>
+                    <option value="miles">Miles</option>
+                </select>
+
+                <label for="toLengthUnit">To:</label>
+                <select id="toLengthUnit">
+                    <option value="meters">Meters</option>
+                    <option value="kilometers">Kilometers</option>
+                    <option value="miles">Miles</option>
+                </select>
+            </div>
+
+            <div id="weightUnits" class="unit-options">
+                <label for="fromWeightUnit">From:</label>
+                <select id="fromWeightUnit">
+                    <option value="grams">Grams</option>
+                    <option value="kilograms">Kilograms</option>
+                    <option value="pounds">Pounds</option>
+                </select>
+
+                <label for="toWeightUnit">To:</label>
+                <select id="toWeightUnit">
+                    <option value="grams">Grams</option>
+                    <option value="kilograms">Kilograms</option>
+                    <option value="pounds">Pounds</option>
+                </select>
+            </div>
+
+            <div id="temperatureUnits" class="unit-options">
+                <label for="fromTemperatureUnit">From:</label>
+                <select id="fromTemperatureUnit">
+                    <option value="celsius">Celsius</option>
+                    <option value="fahrenheit">Fahrenheit</option>
+                    <option value="kelvin">Kelvin</option>
+                </select>
+
+                <label for="toTemperatureUnit">To:</label>
+                <select id="toTemperatureUnit">
+                    <option value="celsius">Celsius</option>
+                    <option value="fahrenheit">Fahrenheit</option>
+                    <option value="kelvin">Kelvin</option>
+                </select>
+            </div>
+
+            <button id="convertButton">Convert</button>
+            <div id="result"></div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
