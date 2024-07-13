@@ -82,7 +82,7 @@ body {
     font-size: 1.7rem;
     font-weight: 500;
     color: var(--text-color);
-    background: var(--second-bg-color);
+    background: var(--bg-color);
     padding: 1rem 2rem;
     border-radius: 0.5rem;
     transition: background 0.3s ease;
