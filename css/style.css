@@ -845,6 +845,9 @@ section:nth-child(odd) .animate.scroll,
     }
 
     .navbar {
+        display: none;
+        flex-direction: column;
+
         position: absolute;
         top: 100%;
         left: -100%;
@@ -898,6 +901,16 @@ section:nth-child(odd) .animate.scroll,
         pointer-events: none;
         background: var(--bg-color);
         opacity: .6;
+    }
+
+    
+    .dropdown {
+        width: 100%;
+    }
+
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
     }
 }
 
