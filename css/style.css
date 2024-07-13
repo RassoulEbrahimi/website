@@ -863,6 +863,8 @@ section:nth-child(odd) .animate.scroll,
     .navbar.active {
         left: 0;
         transition-delay: 0s;
+
+        display: flex;
     }
 
     .navbar .active-nav {
@@ -903,7 +905,7 @@ section:nth-child(odd) .animate.scroll,
         opacity: .6;
     }
 
-    
+
     .dropdown {
         width: 100%;
     }
