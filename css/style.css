@@ -91,7 +91,7 @@ body {
 
 .dropdown .dropbtn:hover,
 .dropdown:hover .dropbtn {
-    background: var(--hover-bg-color);
+    color: var(--main-color);
 }
 
 .dropdown-content {
