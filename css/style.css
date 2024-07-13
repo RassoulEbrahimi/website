@@ -72,6 +72,62 @@ body {
     color: var(--main-color);
 }
 
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .dropbtn {
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--text-color);
+    background: var(--second-bg-color);
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    transition: background 0.3s ease;
+    margin-left: 3.5rem; /* Match the margin with other navbar items */
+}
+
+.dropdown .dropbtn:hover,
+.dropdown:hover .dropbtn {
+    background: var(--hover-bg-color);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-color);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+    left: 0; /* Align dropdown content with the parent */
+}
+
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 1.2rem 1.6rem;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    transition: background 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--hover-bg-color);
+    color: var(--text-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    max-height: 300px; /* Adjust as needed */
+}
+
 #menu-icon {
     position: relative;
     font-size: 3.6rem;
