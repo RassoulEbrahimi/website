@@ -71,6 +71,77 @@ body {
     color: var(--main-color);
 }
 
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 3.5rem; /* Ensure consistent margin with other navbar items */
+}
+
+/* Adjust .dropdown .dropbtn to match other navbar links */
+.dropdown .dropbtn {
+    font-size: 1.7rem; /* Match the font size of other navbar links */
+    font-weight: 500;
+    color: var(--text-color);
+    background: none; /* Remove the background */
+    padding: 0; /* Remove padding for desktop view */
+    border-radius: 0; /* Remove the border-radius */
+    transition: .3s;
+    margin-left: 0; /* Match the margin with other navbar items */
+    display: inline; /* Ensure it displays inline */
+    transform: none; /* Remove transform for desktop view */
+    transition: color 0.3s; /* Ensure color transition */
+    width: auto; /* Ensure width adjusts to content */
+    text-align: left; /* Align text to the left */
+}
+
+.dropdown .dropbtn:hover,
+.dropdown:hover .dropbtn {
+    color: var(--main-color); /* Match hover color */
+}
+
+.navbar.active .dropdown .dropbtn {
+    transform: translateX(0); /* Ensure it slides in like the rest of the links */
+    transition-delay: .25s; /* Ensure the same transition delay */
+}
+
+/* Adjust .dropdown-content to align with other items */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.05); /* Transparent white background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 0.7rem;
+    transition: max-height .3s ease, visibility .3s ease;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    left: 0; /* Align dropdown content with the parent */
+    padding-left: 0; /* Remove padding for desktop view */
+}
+
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 1.2rem 1.6rem;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    transition: background-color .3s, color .3s;
+}
+
+.dropdown-content a:hover {
+    color: var(--main-color); /* Ensure the color changes on hover */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    max-height: 250px; /* Adjust as needed */
+    visibility: visible;
+}
+
 #menu-icon {
     position: relative;
     font-size: 3.6rem;
@@ -80,7 +151,6 @@ body {
 }
 
 section {
-    min-height: 100vh;
     padding: 10rem 9% 2rem;
 }
 
@@ -122,8 +192,10 @@ section {
     -webkit-text-stroke: .7px var(--main-color);
     background-image: linear-gradient(var(--main-color), var(--main-color));
     background-repeat: no-repeat;
-    -webkit-background-clip: text;
-    background-position: -33rem 0;
+    background-clip: text; /* Standard property */
+    -webkit-background-clip: text; /* Webkit-specific property */
+    background-position: -33rem 0; /* Adjusted the background position */
+    
 }
 
 .home.show-animate .home-content .text-animate h3 {
@@ -697,14 +769,30 @@ span {
     color: var(--main-color);
 }
 
-/* ANIMATION RELOAD AND SCROLL */
 
+
+/* ANIMATION RELOAD AND SCROLL */
+.animate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 0%;
+    background: var(--bg-color);
+    z-index: 98;
+}
 
 .animate.home-img {
     width: 50%;
 }
 
-
+.logo .animate,
+.navbar .animate,
+#menu-icon .animate,
+.home.show-animate .animate {
+    animation: showRight 1s ease forwards;
+    animation-delay: calc(.3s * var(--i));
+}
 
 .animate.scroll {
     transition: 1s ease;
@@ -763,7 +851,9 @@ section:nth-child(odd) .animate.scroll,
 }
 
 
-/* Responsive adjustments */
+/* Responsive Design */
+/* Ensure consistent spacing and alignment for the dropdown in mobile view */
+/* Mobile View */
 @media (max-width: 768px) {
     .text-content,
     .text-box,
@@ -778,7 +868,7 @@ section:nth-child(odd) .animate.scroll,
         align-items: center;
     }
     .header {
-        background: var(--bg-color);
+        background: var(--bg-color); /* Solid background color */
     }
 
     #menu-icon {
@@ -821,16 +911,18 @@ section:nth-child(odd) .animate.scroll,
         transition-delay: .25s;
     }
 
-    .navbar a {
+    .navbar a, .dropdown .dropbtn {
         display: block;
         font-size: 2rem;
-        margin: 3rem 0;
+        margin: 3rem 0; /* Ensure consistent margin */
         transform: translateX(-20rem);
         transition: .25s ease;
         transition-delay: 0s;
+        width: 100%; /* Ensure full width for consistency */
+        text-align: left; /* Align text to the left */
     }
 
-    .navbar.active a {
+    .navbar.active a, .navbar.active .dropdown .dropbtn {
         transform: translateX(0);
         transition-delay: .25s;
     }
@@ -848,13 +940,28 @@ section:nth-child(odd) .animate.scroll,
         background-color: #112e42;
         border-radius: 10px;
         padding: 20px;
-        box-shadow: 
-            0 3.2px 2.2px rgba(0, 0, 0, 0.02),
-            0 7.6px 5.3px rgba(0, 0, 0, 0.028),
-            0 14.4px 10px rgba(0, 0, 0, 0.035),
-            0 25.7px 17.9px rgba(0, 0, 0, 0.042),
-            0 48px 33.4px rgba(0, 0, 0, 0.05),
-            0 115px 80px rgba(0, 0, 0, 0.07);
+        box-shadow: none;
+    }
+
+    .dropdown {
+        width: 80%; /* Full width */
+    }
+
+    .dropdown .dropbtn {
+        margin-left: 0; /* Ensure it matches other items */
+    }
+
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        width: 100%;
+        visibility: visible;
+        display: block;
+        padding-left: 0; /* Align with other items */
+    }
+
+    .dropdown-content a {
+        padding: 1rem 2rem;
     }
 }
 
@@ -970,9 +1077,6 @@ section:nth-child(odd) .animate.scroll,
 }
 
 
-
-/* Add these styles to your existing style.css */
-/* Add these styles to your existing style.css */
 /* Add these styles to your existing style.css */
 
 /* Image gallery styling */
@@ -1064,9 +1168,6 @@ section:nth-child(odd) .animate.scroll,
     font-size: 1.2em; /* Change the font size here */
 }
 
-
-
-
 .text-box {
     padding: 20px;
     margin-top: 3rem;
@@ -1075,13 +1176,7 @@ section:nth-child(odd) .animate.scroll,
     border: .2rem solid var(--main-color);
     border-radius: 10px; /* گرد کردن گوشه‌ها */
     font-size: 1.8rem; /* Adjust the font size as needed */
-    box-shadow: 
-        0 3.2px 2.2px rgba(0, 0, 0, 0.02),
-        0 7.6px 5.3px rgba(0, 0, 0, 0.028),
-        0 14.4px 10px rgba(0, 0, 0, 0.035),
-        0 25.7px 17.9px rgba(0, 0, 0, 0.042),
-        0 48px 33.4px rgba(0, 0, 0, 0.05),
-        0 115px 80px rgba(0, 0, 0, 0.07);
+    box-shadow: none;
 }
 
 .text-box h1, .text-box p {
@@ -1099,17 +1194,10 @@ section:nth-child(odd) .animate.scroll,
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
-    box-shadow: 
-    0 3.2px 2.2px rgba(0, 0, 0, 0.02),
-    0 7.6px 5.3px rgba(0, 0, 0, 0.028),
-    0 14.4px 10px rgba(0, 0, 0, 0.035),
-    0 25.7px 17.9px rgba(0, 0, 0, 0.042),
-    0 48px 33.4px rgba(0, 0, 0, 0.05),
-    0 115px 80px rgba(0, 0, 0, 0.07);
-  }
-  
-  
-  .banner img {
+    box-shadow: none;
+}
+
+.banner img {
     height : 100%;
     width: 100%;
     border-radius: 10px;
@@ -1123,17 +1211,17 @@ section:nth-child(odd) .animate.scroll,
 
 /* Video container styling */
 .video-container {
-    width: 100%; /* تنظیم عرض به 100% در صفحه‌های کوچک */
-    flex: 1 1 48%; /* Takes up 48% width with flexible resizing */
+    width: 100%;
+    flex: 1 1 48%;
     box-sizing: border-box;
     border: 2px solid #58a6ff;
     border-radius: 15px;
     overflow: hidden;
-    display: flex; /* Ensures the video fills the container */
-    align-items: center; /* Centers the video vertically */
-    justify-content: center; /* Centers the video horizontally */
-    padding: 0; /* Remove any padding */
-    margin-bottom: 20px; /* فاصله بین کادرها در حالت استک شده */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 20px;
 }
 
 video {
@@ -1147,7 +1235,7 @@ video {
 /* Container to hold both text and video divs */
 .project-content {
     display: flex;
-    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px;
     flex-direction: column;
@@ -1156,16 +1244,19 @@ video {
 
 /* Text content styling */
 .text-content {
-    margin-right: 2%; /* Space between text and video */
-    box-sizing: border-box; /* Ensures padding and border are included in width */
-    font-size: 1.8rem; /* Adjust the font size as needed */
-    line-height: 1.5; /* Adjust the line height for better readability */
+    margin-right: 2%;
+    box-sizing: border-box;
+    font-size: 1.8rem;
+    line-height: 1.5;
 }
 
 
 .content-wrapper {
     display: flex;
-    justify-content: space-between; /* فاصله بین کادرها */
-    width: 80%; /* عرض کلی برای متن و ویدیو */
-    margin-bottom: 20px;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
 }
+
+
