@@ -2,14 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const unitType = document.getElementById('unitType');
     const convertButton = document.getElementById('convertButton');
     const result = document.getElementById('result');
-    const menuIcon = document.getElementById('menu-icon');
-    const navbar = document.querySelector('.navbar');
 
     unitType.addEventListener('change', handleUnitTypeChange);
     convertButton.addEventListener('click', handleConversion);
-    menuIcon.addEventListener('click', () => {
-        navbar.classList.toggle('active');
-    });
 
     function handleUnitTypeChange() {
         const unitOptions = document.querySelectorAll('.unit-options');

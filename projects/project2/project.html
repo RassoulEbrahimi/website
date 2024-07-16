@@ -1,17 +1,25 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit Converter</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- box icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
+
     <!-- header design -->
     <header class="header">
-        <a href="https://rassoulebrahimi.github.io/website/" class="logo">RSL. </a>
+        <a href="https://rassoulebrahimi.github.io/website/" class="logo">RSL.<span class="animate" style="--i:1;"></span></a>
+
+        <div class="bx bx-menu" id="menu-icon"><span class="animate" style="--i:2;"></span></div>
 
         <nav class="navbar">
             <a href="https://rassoulebrahimi.github.io/website/">Home</a>
@@ -19,77 +27,104 @@
             <a href="https://rassoulebrahimi.github.io/website/#education">Education</a>
             <a href="https://rassoulebrahimi.github.io/website/#skills">Skills</a>
             <a href="https://rassoulebrahimi.github.io/website/#contact">Contact</a>
-            <a href="https://rassoulebrahimi.github.io/website/projects/project.html">Project</a>
+            <div class="dropdown">
+                <button class="dropbtn">Projects<i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="https://rassoulebrahimi.github.io/website/projects/project1/project.html">Project #1</a>
+                    <a href="https://rassoulebrahimi.github.io/website/projects/project2/project.html">Project #2</a>
+                    <a href="https://rassoulebrahimi.github.io/website/projects/project3/project.html">Project #3</a>
+                </div>
+            </div>
 
-            
+            <span class="active-nav"></span>
+            <span class="animate" style="--i:2;"></span>
         </nav>
     </header>
-    
-    <div class="container">
-        <h1>Unit Converter</h1>
-        <div class="converter">
-            <label for="inputValue">Enter Value:</label>
-            <input type="number" id="inputValue" placeholder="Enter value">
 
-            <label for="unitType">Select Conversion Type:</label>
-            <select id="unitType">
-                <option value="length">Length</option>
-                <option value="weight">Weight</option>
-                <option value="temperature">Temperature</option>
-            </select>
+    <!-- Unit Converter container design -->
+    <section>
+        <div class="container">
+            <h1>Unit Converter</h1>
+            <div class="converter">
+                <label for="inputValue">Enter Value:</label>
+                <input type="number" id="inputValue" placeholder="Enter value">
 
-            <div id="lengthUnits" class="unit-options">
-                <label for="fromLengthUnit">From:</label>
-                <select id="fromLengthUnit">
-                    <option value="meters">Meters</option>
-                    <option value="kilometers">Kilometers</option>
-                    <option value="miles">Miles</option>
+                <label for="unitType">Select Conversion Type:</label>
+                <select id="unitType">
+                    <option value="length">Length</option>
+                    <option value="weight">Weight</option>
+                    <option value="temperature">Temperature</option>
                 </select>
 
-                <label for="toLengthUnit">To:</label>
-                <select id="toLengthUnit">
-                    <option value="meters">Meters</option>
-                    <option value="kilometers">Kilometers</option>
-                    <option value="miles">Miles</option>
-                </select>
-            </div>
+                <div id="lengthUnits" class="unit-options">
+                    <label for="fromLengthUnit">From:</label>
+                    <select id="fromLengthUnit">
+                        <option value="meters">Meters</option>
+                        <option value="kilometers">Kilometers</option>
+                        <option value="miles">Miles</option>
+                    </select>
 
-            <div id="weightUnits" class="unit-options">
-                <label for="fromWeightUnit">From:</label>
-                <select id="fromWeightUnit">
-                    <option value="grams">Grams</option>
-                    <option value="kilograms">Kilograms</option>
-                    <option value="pounds">Pounds</option>
-                </select>
+                    <label for="toLengthUnit">To:</label>
+                    <select id="toLengthUnit">
+                        <option value="meters">Meters</option>
+                        <option value="kilometers">Kilometers</option>
+                        <option value="miles">Miles</option>
+                    </select>
+                </div>
 
-                <label for="toWeightUnit">To:</label>
-                <select id="toWeightUnit">
-                    <option value="grams">Grams</option>
-                    <option value="kilograms">Kilograms</option>
-                    <option value="pounds">Pounds</option>
-                </select>
-            </div>
+                <div id="weightUnits" class="unit-options">
+                    <label for="fromWeightUnit">From:</label>
+                    <select id="fromWeightUnit">
+                        <option value="grams">Grams</option>
+                        <option value="kilograms">Kilograms</option>
+                        <option value="pounds">Pounds</option>
+                    </select>
 
-            <div id="temperatureUnits" class="unit-options">
-                <label for="fromTemperatureUnit">From:</label>
-                <select id="fromTemperatureUnit">
-                    <option value="celsius">Celsius</option>
-                    <option value="fahrenheit">Fahrenheit</option>
-                    <option value="kelvin">Kelvin</option>
-                </select>
+                    <label for="toWeightUnit">To:</label>
+                    <select id="toWeightUnit">
+                        <option value="grams">Grams</option>
+                        <option value="kilograms">Kilograms</option>
+                        <option value="pounds">Pounds</option>
+                    </select>
+                </div>
 
-                <label for="toTemperatureUnit">To:</label>
-                <select id="toTemperatureUnit">
-                    <option value="celsius">Celsius</option>
-                    <option value="fahrenheit">Fahrenheit</option>
-                    <option value="kelvin">Kelvin</option>
-                </select>
-            </div>
+                <div id="temperatureUnits" class="unit-options">
+                    <label for="fromTemperatureUnit">From:</label>
+                    <select id="fromTemperatureUnit">
+                        <option value="celsius">Celsius</option>
+                        <option value="fahrenheit">Fahrenheit</option>
+                        <option value="kelvin">Kelvin</option>
+                    </select>
 
-            <button id="convertButton">Convert</button>
+                    <label for="toTemperatureUnit">To:</label>
+                    <select id="toTemperatureUnit">
+                        <option value="celsius">Celsius</option>
+                        <option value="fahrenheit">Fahrenheit</option>
+                        <option value="kelvin">Kelvin</option>
+                    </select>
+                </div>
+
+                <button id="convertButton">Convert</button>
             <div id="result"></div>
         </div>
-    </div>
+    </section>
+
+    <!-- Footer design -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2024 by Rassoul Ebrahimi | All Rights Reserved.</p>
+
+            <span class="animate scroll" style="--i:1;"></span>
+        </div>
+
+        <div class="footer-iconTop">
+            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
+
+            <span class="animate scroll" style="--i:3;"></span>
+        </div>
+    </footer>
+
     <script src="js/script.js"></script>
 </body>
+
 </html>
