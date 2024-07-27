@@ -37,7 +37,7 @@ def webhook():
     steuer = calculate_tax(einkommen, jahr, familienstand)
     
     response = {
-        "fulfillmentText": f"Ihre Einkommensteuer beträgt {steuer} Euro."
+        "fulfillmentText": f"Ihre Einkommensteuer beträgt {steuer} "
     }
     
     return jsonify(response)

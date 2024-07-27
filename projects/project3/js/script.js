@@ -20,7 +20,7 @@ function calculateTax() {
     .then(response => response.json())
     .then(result => {
         document.getElementById('result').innerHTML = `
-            <p>${result.fulfillmentText} €</p> 
+            <p>${result.fulfillmentText} €.</p> 
             <!-- Verwendung von fulfillmentText -->
             <!-- Weitere Ergebnisse hier anzeigen -->
         `;
