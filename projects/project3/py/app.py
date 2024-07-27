@@ -21,6 +21,10 @@ def calculate_tax(einkommen, jahr, familienstand):
             steuer = round(0.45 * einkommen - 18307.73)
     return steuer
 
+@app.route('/')
+def index():
+    return "Hello, world! The server is running."
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
