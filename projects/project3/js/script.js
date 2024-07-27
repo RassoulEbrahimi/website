@@ -10,7 +10,7 @@ function calculateTax() {
         jahr: formData.get('jahr')
     };
 
-    fetch('http://127.0.0.1:5000/webhook', { // <-- Stelle sicher, dass dies zu /webhook zeigt, wie im Flask-Code definiert
+    fetch('https://steuertaxi.onrender.com/webhook', { // <-- Stelle sicher, dass dies zu /webhook zeigt, wie im Flask-Code definiert
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -20,7 +20,8 @@ function calculateTax() {
     .then(response => response.json())
     .then(result => {
         document.getElementById('result').innerHTML = `
-            <p>Einkommensteuer: ${result.fulfillmentText} €</p> <!-- Verwendung von fulfillmentText -->
+            <p>Einkommensteuer: ${result.fulfillmentText} €</p> 
+            <!-- Verwendung von fulfillmentText -->
             <!-- Weitere Ergebnisse hier anzeigen -->
         `;
     })
