@@ -20,10 +20,14 @@ function calculateTax() {
     .then(response => response.json())
     .then(result => {
         document.getElementById('result').innerHTML = `
-            <p>${result.fulfillmentText} €.</p> 
-            <!-- Verwendung von fulfillmentText -->
-            <!-- Weitere Ergebnisse hier anzeigen -->
+            ${result.fulfillmentText} 
         `;
     })
     .catch(error => console.error('Error:', error));
 }
+
+// Event listener to handle form submission
+document.getElementById('steuerForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    calculateTax();
+});
