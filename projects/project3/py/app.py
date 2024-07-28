@@ -202,13 +202,12 @@ def webhook():
     
     response = {
         "fulfillmentText": f"""
-        Zu versteuerndes Einkommen: {einkommen:.2f} €
-        Ihre Einkommensteuer beträgt: {steuer:.2f} €
-        Kirchensteuer: {kirchensteuer:.2f} €
-        Steuerklasse: {steuerklasse}
-        
-        *
-        * Die Berechnungen erfolgen unter Berücksichtigung der Rundungsvorschriften.
+        <div>Zu versteuerndes Einkommen: {einkommen:.2f} €</div>
+        <div>Ihre Einkommensteuer beträgt: {steuer:.2f} €</div>
+        <div>Kirchensteuer: {kirchensteuer:.2f} €</div>
+        <div>Steuerklasse: {steuerklasse}</div>
+        <div>*</div>
+        <div>* Die Berechnungen erfolgen unter Berücksichtigung der Rundungsvorschriften.</div>
         """
     }
     
