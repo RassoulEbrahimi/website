@@ -39,17 +39,21 @@ def calculate_tax(einkommen, jahr, familienstand, religion, bundesland):
     elif jahr == 2023:
         if einkommen <= 10908:
             steuer = 0
-        elif einkommen <= 15999:
+            steuerklasse = "Klasse I - bis 10.908 €"
+        elif 10909 <= einkommen <= 15999:
             y = (einkommen - 10908) / 10000
-            steuer = round((979.18 * y + 1400) * y)
-        elif einkommen <= 62809:
+            steuer = int(round(((979.18 * y) + 1400) * y, 2))
+            steuerklasse = "Klasse II - von 10.909 bis 15.999 €"
+        elif 16000 <= einkommen <= 62809:
             z = (einkommen - 15999) / 10000
-            steuer = round((192.59 * z + 2397) * z + 966.53)
-        elif einkommen <= 277825:
-            steuer = round(0.42 * einkommen - 9972.98)
-        else:
-            steuer = round(0.45 * einkommen - 18307.73)
-
+            steuer = int(round((192.59 * z + 2397) * z + 966.53, 2))
+            steuerklasse = "Klasse III - von 16.000 bis 62.809 €"
+        elif 62810 <= einkommen <= 277825:
+            steuer = int(round((0.42 * einkommen) - 9972.98, 2))
+            steuerklasse = "Klasse IV - von 62.810 bis 277.825 €"
+        elif einkommen >= 277826:
+            steuer = int(round((0.45 * einkommen) - 18307.73, 2))
+            steuerklasse = "Klasse V - ab 277.826 €"
 
         if religion == "katholisch/evangelisch":
             if bundesland not in ["Bayern", "Baden-Württemberg"]:
@@ -177,7 +181,7 @@ def calculate_tax(einkommen, jahr, familienstand, religion, bundesland):
             steuer *= 2
             kirchensteuer *= 2
 
-    return steuer,  kirchensteuer
+    return steuer,  kirchensteuer, steuerklasse
 
 @app.route('/')
 def index():
@@ -194,13 +198,22 @@ def webhook():
     religion = req.get('religion', 'ohne')
     bundesland = req.get('bundesland', 'Baden-Württemberg')
     
-    steuer, kirchensteuer = calculate_tax(einkommen, jahr, familienstand, religion, bundesland)
+    steuer, kirchensteuer, steuerklasse = calculate_tax(einkommen, jahr, familienstand, religion, bundesland)
     
     response = {
-        "fulfillmentText": f"Ihre Einkommensteuer beträgt {steuer} Euro und Ihre Kirchensteuer beträgt {kirchensteuer} Euro."
+        "fulfillmentText": f"""
+        Zu versteuerndes Einkommen: {einkommen:.2f} €
+        Ihre Einkommensteuer beträgt: {steuer:.2f} €
+        Kirchensteuer: {kirchensteuer:.2f} €
+        Steuerklasse: {steuerklasse}
+        
+        *
+        * Die Berechnungen erfolgen unter Berücksichtigung der Rundungsvorschriften.
+        """
     }
     
     return jsonify(response)
+
 
 
 if __name__ == '__main__':
