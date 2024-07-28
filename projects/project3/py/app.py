@@ -4,8 +4,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-def calculate_tax(einkommen, jahr, familienstand):
+def calculate_tax(einkommen, jahr, familienstand, religion, bundesland):
     steuer = 0
+    kirchensteuer = 0
+
     if jahr == 2024:
         if einkommen <= 11604:
             steuer = 0
@@ -19,6 +21,20 @@ def calculate_tax(einkommen, jahr, familienstand):
             steuer = round(0.42 * einkommen - 10602.13)
         else:
             steuer = round(0.45 * einkommen - 18936.88)
+
+
+        if religion == "katholisch/evangelisch":
+            if bundesland not in ["Bayern", "Baden-Württemberg"]:
+                kirchensteuer = round(steuer * 0.09, 2)
+            else:
+                kirchensteuer = round(steuer * 0.08, 2)
+        elif religion == "ohne":
+            kirchensteuer = 0
+
+        if familienstand == "verheiratet":
+            steuer *= 2
+            kirchensteuer *= 2
+
 
     elif jahr == 2023:
         if einkommen <= 10908:
@@ -34,6 +50,20 @@ def calculate_tax(einkommen, jahr, familienstand):
         else:
             steuer = round(0.45 * einkommen - 18307.73)
 
+
+        if religion == "katholisch/evangelisch":
+            if bundesland not in ["Bayern", "Baden-Württemberg"]:
+                kirchensteuer = round(steuer * 0.09, 2)
+            else:
+                kirchensteuer = round(steuer * 0.08, 2)
+        elif religion == "ohne":
+            kirchensteuer = 0
+
+        if familienstand == "verheiratet":
+            steuer *= 2
+            kirchensteuer *= 2
+
+
     elif jahr == 2022:
         if einkommen <= 10347:
             steuer = 0
@@ -47,6 +77,20 @@ def calculate_tax(einkommen, jahr, familienstand):
             steuer = round(0.42 * einkommen - 9336.45)
         else:
             steuer = round(0.45 * einkommen - 17671.20)
+
+
+        if religion == "katholisch/evangelisch":
+            if bundesland not in ["Bayern", "Baden-Württemberg"]:
+                kirchensteuer = round(steuer * 0.09, 2)
+            else:
+                kirchensteuer = round(steuer * 0.08, 2)
+        elif religion == "ohne":
+            kirchensteuer = 0
+
+        if familienstand == "verheiratet":
+            steuer *= 2
+            kirchensteuer *= 2
+
 
 
     elif jahr == 2021:
@@ -64,6 +108,20 @@ def calculate_tax(einkommen, jahr, familienstand):
             steuer = round(0.45 * einkommen - 17374.99)
 
 
+
+        if religion == "katholisch/evangelisch":
+            if bundesland not in ["Bayern", "Baden-Württemberg"]:
+                kirchensteuer = round(steuer * 0.09, 2)
+            else:
+                kirchensteuer = round(steuer * 0.08, 2)
+        elif religion == "ohne":
+            kirchensteuer = 0
+
+        if familienstand == "verheiratet":
+            steuer *= 2
+            kirchensteuer *= 2
+
+
     elif jahr == 2020:
         if einkommen <= 9408:
             steuer = 0
@@ -77,6 +135,19 @@ def calculate_tax(einkommen, jahr, familienstand):
             steuer = round(0.42 * einkommen - 8963.74)
         else:
             steuer = round(0.45 * einkommen - 17078.74)
+
+
+        if religion == "katholisch/evangelisch":
+            if bundesland not in ["Bayern", "Baden-Württemberg"]:
+                kirchensteuer = round(steuer * 0.09, 2)
+            else:
+                kirchensteuer = round(steuer * 0.08, 2)
+        elif religion == "ohne":
+            kirchensteuer = 0
+
+        if familienstand == "verheiratet":
+            steuer *= 2
+            kirchensteuer *= 2
 
 
     elif jahr == 2019:
@@ -93,7 +164,20 @@ def calculate_tax(einkommen, jahr, familienstand):
         else:
             steuer = round(0.45 * einkommen - 16740.68)
 
-    return steuer
+
+        if religion == "katholisch/evangelisch":
+            if bundesland not in ["Bayern", "Baden-Württemberg"]:
+                kirchensteuer = round(steuer * 0.09, 2)
+            else:
+                kirchensteuer = round(steuer * 0.08, 2)
+        elif religion == "ohne":
+            kirchensteuer = 0
+
+        if familienstand == "verheiratet":
+            steuer *= 2
+            kirchensteuer *= 2
+
+    return steuer,  kirchensteuer
 
 @app.route('/')
 def index():
@@ -107,14 +191,17 @@ def webhook():
     einkommen = float(req.get('einkommen', 0))
     jahr = int(req.get('jahr', '2023'))
     familienstand = req.get('familienstand', 'alleinstehend')
+    religion = req.get('religion', 'ohne')
+    bundesland = req.get('bundesland', 'Baden-Württemberg')
     
-    steuer = calculate_tax(einkommen, jahr, familienstand)
+    steuer, kirchensteuer = calculate_tax(einkommen, jahr, familienstand, religion, bundesland)
     
     response = {
-        "fulfillmentText": f"Ihre Einkommensteuer beträgt {steuer} "
+        "fulfillmentText": f"Ihre Einkommensteuer beträgt {steuer} Euro und Ihre Kirchensteuer beträgt {kirchensteuer} Euro."
     }
     
     return jsonify(response)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
