@@ -21,12 +21,12 @@ function calculateTax() {
     .then(result => {
         // Verwende die result.fulfillmentText, um die gewünschte Ausgabe zu formatieren
         document.getElementById('result').innerHTML = `
-            <div>Zu versteuerndes Einkommen: ${data.einkommen} €</div>
-            <div>Ihre Einkommensteuer beträgt: ${result.steuer} €</div>
-            <div>Kirchensteuer: ${result.kirchensteuer} €</div>
-            <div>Steuerklasse: ${result.steuerklasse}</div>
-            <div>*</div>
-            <div>* Die Berechnungen erfolgen unter Berücksichtigung der Rundungsvorschriften.</div>
+            <p>Zu versteuerndes Einkommen: ${data.einkommen} €</p>
+            <p>Ihre Einkommensteuer beträgt: ${result.steuer} €</p>
+            <p>Kirchensteuer: ${result.kirchensteuer} €</p>
+            <p>Steuerklasse: ${result.steuerklasse}</p>
+            <p>*</p>
+            <p>* Die Berechnungen erfolgen unter Berücksichtigung der Rundungsvorschriften.</p>
         `;
     })
     .catch(error => console.error('Error:', error));
