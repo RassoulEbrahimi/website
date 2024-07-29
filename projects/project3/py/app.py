@@ -7,6 +7,7 @@ CORS(app)
 def calculate_tax(einkommen, jahr, familienstand, religion, bundesland):
     steuer = 0
     kirchensteuer = 0
+    steuerklasse = ""
 
     if jahr == 2024:
         if einkommen <= 11604:
@@ -201,14 +202,10 @@ def webhook():
     steuer, kirchensteuer, steuerklasse = calculate_tax(einkommen, jahr, familienstand, religion, bundesland)
     
     response = {
-        "fulfillmentText": f"""
-        <div>Zu versteuerndes Einkommen: {einkommen:.2f} €</div>
-        <div>Ihre Einkommensteuer beträgt: {steuer:.2f} €</div>
-        <div>Kirchensteuer: {kirchensteuer:.2f} €</div>
-        <div>Steuerklasse: {steuerklasse}</div>
-        <div>*</div>
-        <div>* Die Berechnungen erfolgen unter Berücksichtigung der Rundungsvorschriften.</div>
-        """
+        "steuer": steuer,
+        "kirchensteuer": kirchensteuer,
+        "steuerklasse": steuerklasse,
+        "fulfillmentText": f"Zu versteuerndes Einkommen: {einkommen} €<br>Ihre Einkommensteuer beträgt: {steuer} €<br>Kirchensteuer: {kirchensteuer} €<br>Steuerklasse: {steuerklasse}<br>*<br>* Die Berechnungen erfolgen unter Berücksichtigung der Rundungsvorschriften."
     }
     
     return jsonify(response)
