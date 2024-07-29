@@ -4,6 +4,8 @@ body {
     align-items: center; /* Ändere hier von center zu flex-start, damit die Container oben ausgerichtet sind */
     height: 100vh;
     margin: 0;
+    /* Adding margin to the top of the body to prevent overlap */
+    margin-top: 70px; /* Adjust this value based on the height of your header */
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
     color: #333;
@@ -12,6 +14,7 @@ body {
 }
 
 /* Navigation Bar Styles */
+/* Ensuring the header stays at the top */
 .header {
     display: flex;
     justify-content: space-between;
@@ -19,6 +22,10 @@ body {
     padding: 15px 30px;
     background-color: #333;
     color: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .header .logo {
@@ -86,6 +93,7 @@ body {
 }
 
 /* Footer Styles */
+/* Adjusting the rest of your styles as needed */
 .footer {
     background-color: #333;
     color: #fff;
@@ -127,6 +135,11 @@ body {
     100% {
         transform: translateY(-100%);
     }
+}
+
+/* Ensuring the content is not hidden under the footer */
+#content {
+    padding-bottom: 100px; /* Adjust this value based on the height of your footer */
 }
 
 
