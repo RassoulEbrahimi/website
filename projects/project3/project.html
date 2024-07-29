@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steuerrechner</title>
+    <title>Steuertaxi</title>
     <link rel="stylesheet" href="css/style.css">
 
     <!-- box icons -->
@@ -13,6 +12,7 @@
 </head>
 
 <body>
+
     <!-- header design -->
     <header class="header">
         <a href="https://rassoulebrahimi.github.io/website/" class="logo">RSL.<span class="animate" style="--i:1;"></span></a>
@@ -39,9 +39,10 @@
         </nav>
     </header>
 
+
     <!-- Body content, including your form, goes here -->
     <div id="content">
-        <!-- Your form and other content -->
+        <!-- <h1>Steuertaxi - Berechnung der Einkommensteuer</h1> -->
         <div id="gui">
             <form id="steuerForm">
                 <label for="einkommen">Zu versteuerndes Jahreseinkommen (zvE):</label>
@@ -77,7 +78,7 @@
                     <option value="Sachsen-Anhalt">Sachsen-Anhalt</option>
                     <option value="Schleswig-Holstein">Schleswig-Holstein</option>
                     <option value="Thüringen">Thüringen</option>
-                </select>
+                </select><br>
                 
                 <label for="jahr">Jahr:</label>
                 <select id="jahr" name="jahr">
@@ -87,15 +88,26 @@
                     <option value="2021">2021</option>
                     <option value="2020">2020</option>
                     <option value="2019">2019</option>
-                </select>
+                </select><br>
                 
                 <button type="button" onclick="calculateTax()">Berechnen</button>
             </form>
             
-            <div id="result">
+            <div id="result" class="result-box">
                 <!-- Ergebnisse hier anzeigen -->
             </div>
         </div>
+    </div>
+
+    
+    <div id="chatbot" class="chatbot-container">
+        <!-- Chatbot-Integration hier -->
+        <iframe
+            allow="microphone;"
+            width="350"
+            height="430"
+            src="https://console.dialogflow.com/api-client/demo/embedded/d7ff7b8e-0ff4-4e24-a411-6416ced53efc">
+        </iframe>
     </div>
 
     <!-- Footer design -->
@@ -113,7 +125,7 @@
         </div>
     </footer>
 
+
     <script src="js/script.js"></script>
 </body>
-
 </html>
