@@ -16,18 +16,144 @@ body {
 /* Navigation Bar Styles */
 /* Ensuring the header stays at the top */
 /* CSS to ensure the header stays at the top */
+/* Navbar and Dropdown Styles */
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    background-color: #333;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+    background: transparent;
+    transition: 0.3s;
+    z-index: 100; /* Ensure other elements do not interfere with the dropdown */
+    overflow: visible; /* Ensure dropdown is not cut off */
 }
+
+.header.sticky {
+    background: var(--bg-color);
+}
+
+.logo {
+    position: relative;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.bx-menu {
+    font-size: 3.6rem;
+    color: var(--text-color);
+    cursor: pointer;
+    display: none;
+}
+
+.navbar {
+    display: flex;
+}
+
+.navbar a, .dropbtn {
+    font-size: 1.7rem;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-left: 3.5rem;
+    transition: 0.3s;
+}
+
+.navbar a:hover, .navbar a.active, .dropbtn:hover {
+    color: var(--main-color);
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 3.5rem; /* Ensure consistent margin with other navbar items */
+}
+
+/* Adjust .dropdown .dropbtn to match other navbar links */
+.dropdown .dropbtn {
+    font-size: 1.7rem; /* Match the font size of other navbar links */
+    font-weight: 500;
+    color: var(--text-color);
+    background: none;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    transition: .3s;
+    margin-left: 0;
+    display: inline;
+    transform: none;
+    transition: color 0.3s;
+    width: auto;
+    text-align: left;
+    text-decoration: none;
+}
+
+.dropdown .dropbtn:hover, .dropdown:hover .dropbtn {
+    color: var(--main-color);
+}
+
+.navbar.active .dropdown .dropbtn {
+    transform: translateX(0); /* Ensure it slides in like the rest of the links */
+    transition-delay: .25s; /* Ensure the same transition delay */
+}
+
+/* Adjust .dropdown-content to align with other items */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 0.7rem;
+    transition: max-height 0.3s ease, visibility 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    left: 0;
+    top: 100%; /* Ensure the dropdown appears below the button */
+    z-index: 1000; /* Ensure the dropdown is above other elements */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    max-height: 250px;
+    visibility: visible;
+    z-index: 1000; /* Ensure the dropdown is above other elements */
+}
+
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 1.2rem 1.6rem;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    color: var(--main-color);
+}
+
+#menu-icon {
+    position: relative;
+    font-size: 3.6rem;
+    color: var(--text-color);
+    cursor: pointer;
+    display: none;
+}
+
+section {
+    position: relative;
+    z-index: 1;
+    padding: 10rem 9% 2rem;
+    overflow: visible; /* Ensure dropdown is not cut off */
+}
+
+
 
 .header .logo {
     font-size: 24px;
@@ -93,16 +219,68 @@ body {
     background-color: #444;
 }
 
-/* Footer Styles */
 /* Adjusting the rest of your styles as needed */
+/* Footer Styles */
 .footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
     text-align: center;
-    position: fixed;
-    bottom: 0;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem 9%;
+    background: var(--second-bg-color);
     width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0; /* Ensure footer doesn't shrink */
+}
+
+.footer-text, .footer-iconTop {
+    position: relative;
+}
+
+
+.footer-text p {
+    font-size: 1.6rem;
+}
+
+.footer-iconTop a {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem;
+    background: var(--main-color);
+    border: 0.2rem solid var(--main-color);
+    border-radius: 0.6rem;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.footer-iconTop a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--second-bg-color);
+    z-index: -1;
+    transition: .5s;
+}
+
+.footer-iconTop a:hover::before {
+    width: 100%;
+}
+
+.footer-iconTop a i {
+    font-size: 2.4rem;
+    color: var(--bg-color);
+    transition: 0.5s;
+}
+
+.footer-iconTop a:hover i {
+    color: var(--main-color);
 }
 
 .footer .footer-text {

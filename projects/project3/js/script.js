@@ -38,6 +38,23 @@ document.getElementById('steuerForm').addEventListener('submit', function(event)
     calculateTax();
 });
 
+// JavaScript to handle the responsive navbar and dropdown
+document.addEventListener('DOMContentLoaded', () => {
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+
+    menuIcon.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+    });
+
+    const dropdown = document.querySelector('.dropdown');
+    dropdown.addEventListener('click', () => {
+        const dropdownContent = dropdown.querySelector('.dropdown-content');
+        dropdownContent.classList.toggle('show');
+    });
+});
+
+
 // JavaScript to handle menu icon for mobile view
 const menuIcon = document.getElementById('menu-icon');
 const navbar = document.querySelector('.navbar');
