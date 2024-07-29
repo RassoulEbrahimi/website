@@ -11,6 +11,124 @@ body {
     /* flex-direction: column; */
 }
 
+/* Navigation Bar Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #333;
+    color: #fff;
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header .navbar {
+    display: flex;
+    gap: 15px;
+}
+
+.header .navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.header .navbar a:hover,
+.header .navbar a.active-nav {
+    background-color: #444;
+}
+
+.header .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.header .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #444;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.header .dropdown-content a {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.header .dropdown-content a:hover {
+    background-color: #555;
+}
+
+.header .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.header .dropbtn {
+    background-color: #333;
+    color: #fff;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.header .dropbtn:hover {
+    background-color: #444;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer .footer-text {
+    margin-bottom: 10px;
+}
+
+.footer .footer-iconTop a {
+    color: #fff;
+    font-size: 24px;
+    display: inline-block;
+    transition: color 0.3s;
+}
+
+.footer .footer-iconTop a:hover {
+    color: #ff6347;
+}
+
+.animate {
+    display: inline-block;
+}
+
+.animate.scroll {
+    animation: scroll 10s linear infinite;
+}
+
+/* Keyframes for animation */
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
 
 .form-container, .chatbot-container {
     background-color: #fff;

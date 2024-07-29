@@ -37,3 +37,12 @@ document.getElementById('steuerForm').addEventListener('submit', function(event)
     event.preventDefault();
     calculateTax();
 });
+
+// JavaScript to handle menu icon for mobile view
+const menuIcon = document.getElementById('menu-icon');
+const navbar = document.querySelector('.navbar');
+
+menuIcon.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+});
+
