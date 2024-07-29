@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steuertaxi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- <h1>Steuertaxi - Berechnung der Einkommensteuer</h1> -->
+    <div id="gui">
+        <form id="steuerForm">
+            <label for="einkommen">Zu versteuerndes Jahreseinkommen (zvE):</label>
+            <input type="number" id="einkommen" name="einkommen" required><br>
+            
+            <label for="familienstand">Familienstand:</label>
+            <select id="familienstand" name="familienstand" required>
+                <option value="alleinstehend">Alleinstehend</option>
+                <option value="verheiratet">Verheiratet</option>
+            </select><br>
+            
+            <label for="religion">Religion:</label>
+            <select id="religion" name="religion" required>
+                <option value="katholisch/evangelisch">Katholisch/Evangelisch</option>
+                <option value="ohne">Ohne</option>
+            </select><br>
+            
+            <label for="bundesland">Bundesland:</label>
+            <select id="bundesland" name="bundesland">
+                <option value="Baden-Württemberg">Baden-Württemberg</option>
+                <option value="Bayern">Bayern</option>
+                <option value="Berlin">Berlin</option>
+                <option value="Brandenburg">Brandenburg</option>
+                <option value="Bremen">Bremen</option>
+                <option value="Hamburg">Hamburg</option>
+                <option value="Hessen">Hessen</option>
+                <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
+                <option value="Niedersachsen">Niedersachsen</option>
+                <option value="Nordrhein-Westfalen">Nordrhein-Westfalen</option>
+                <option value="Rheinland-Pfalz">Rheinland-Pfalz</option>
+                <option value="Saarland">Saarland</option>
+                <option value="Sachsen">Sachsen</option>
+                <option value="Sachsen-Anhalt">Sachsen-Anhalt</option>
+                <option value="Schleswig-Holstein">Schleswig-Holstein</option>
+                <option value="Thüringen">Thüringen</option>
+            </select>
+            
+            <label for="jahr">Jahr:</label>
+            <select id="jahr" name="jahr">
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+            </select>
+            
+            <button type="button" onclick="calculateTax()">Berechnen</button>
+        </form>
+        
+        <div id="result" class="result-box">
+            <!-- Ergebnisse hier anzeigen -->
+        </div>
+    </div>
+    
+    <div id="chatbot" class="chatbot-container">
+        <!-- Chatbot-Integration hier -->
+        <iframe
+            allow="microphone;"
+            width="350"
+            height="430"
+            src="https://console.dialogflow.com/api-client/demo/embedded/d7ff7b8e-0ff4-4e24-a411-6416ced53efc">
+        </iframe>
+    </div>
+
+
+
+    <script src="js/script.js"></script>
+</body>
+</html>
