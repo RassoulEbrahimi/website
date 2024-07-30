@@ -216,10 +216,14 @@ def webhook():
     steuer, kirchensteuer, steuerklasse = calculate_tax(einkommen, jahr, familienstand, religion, bundesland)
     
     response = {
-        "steuer": steuer,
-        "kirchensteuer": kirchensteuer,
+        "einkommen": f"{einkommen:.2f}",
+        "steuer": f"{steuer:.2f}",
+        "kirchensteuer": f"{kirchensteuer:.2f}",
         "steuerklasse": steuerklasse,
-        "fulfillmentText": f"Zu versteuerndes Einkommen: {einkommen:.2f} €<br>Ihre Einkommensteuer beträgt: {steuer:.2f} €<br>Kirchensteuer: {kirchensteuer:.2f} €<br>Steuerklasse: {steuerklasse}<br>*<br>* Die Berechnungen erfolgen unter Berücksichtigung der Rundungsvorschriften."
+        "footnotes": [
+            "* Die Berechnungen erfolgen unter Berücksichtigung der Rundungsvorschriften.",
+            "* Splittingtarif für Verheiratete.",
+        ]
     }
     
     return jsonify(response)

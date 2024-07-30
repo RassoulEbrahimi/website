@@ -408,7 +408,7 @@ h1 {
 
 /* Stil für den Hauptcontainer */
 #gui {
-    width: 375px;
+    width: 430px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -465,16 +465,47 @@ h1 {
 
 .result-box {
     margin-top: 20px;
-    padding: 20px;
+    padding: 15px;
     border: 1px solid #aaaaff;
     border-radius: 10px;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem; /* Smaller base font size */
 }
 
 .result-box p {
-    margin: 0;
+    margin: 0 0 5px 0; /* Add some space between lines */
     padding: 0;
+}
+
+/* If you want to style specific parts differently */
+.result-box .result-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.result-box .result-value {
+    line-height: 2.2;
+    font-size: 1.3rem;
+    color: var(--bg-color); /* Or any color you prefer */
+}
+
+.result-box i {
+    font-style: italic;
+    color: #555; /* Adjust color as needed */
+}
+
+.result-box strong {
+    font-weight: bold;
+    color: #000; /* Adjust color as needed */
+}
+
+.result-box .result-footnote {
+    font-size: 0.9rem; /* Even smaller for footnote */
+    color: var(--main-color);
+    margin-top: 18px;
+    line-height: .3;
 }
 
 .chatbot-container {
