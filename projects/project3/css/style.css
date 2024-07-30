@@ -1,3 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --bg-color: #081b29;
+    --second-bg-color: #112e42;
+    --text-color: #ededed;
+    --main-color: #00abf0;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+
+
+
+
 body {
     display: flex;
     justify-content: center;
@@ -23,6 +54,7 @@ body {
     left: 0;
     width: 100%;
     padding: 2rem 9%;
+    background: var(--bg-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,6 +66,7 @@ body {
 
 .header.sticky {
     background: var(--bg-color);
+    border-bottom: .1rem solid rgba(0, 0, 0, .2);
 }
 
 .logo {
@@ -41,6 +74,7 @@ body {
     font-size: 2.5rem;
     color: var(--text-color);
     font-weight: 600;
+    cursor: default;
 }
 
 .bx-menu {
@@ -53,6 +87,17 @@ body {
 .navbar {
     display: flex;
 }
+
+
+.dropbtn {
+    font-size: 1.7rem;
+    color: var(--text-color);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
 
 .navbar a, .dropbtn {
     font-size: 1.7rem;
@@ -105,9 +150,9 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--bg-color);
     backdrop-filter: blur(10px);
-    min-width: 200px;
+    min-width: 160px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 0.7rem;
     transition: max-height 0.3s ease, visibility 0.3s ease;
@@ -116,7 +161,9 @@ body {
     visibility: hidden;
     left: 0;
     top: 100%; /* Ensure the dropdown appears below the button */
-    z-index: 1000; /* Ensure the dropdown is above other elements */
+    z-index: 1;
+
+    /* z-index: 1000; Ensure the dropdown is above other elements */
 }
 
 .dropdown:hover .dropdown-content {
@@ -165,16 +212,19 @@ section {
     gap: 15px;
 }
 
-.header .navbar a {
-    color: #fff;
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 5px;
+.navbar a {
+    font-size: 1.7rem;
+    color: var(--text-color);
+    margin-left: 4rem;
+    transition: .3s;
 }
+
+
 
 .header .navbar a:hover,
 .header .navbar a.active-nav {
     background-color: #444;
+    color: var(--main-color);
 }
 
 .header .dropdown {
@@ -513,6 +563,12 @@ form button:hover {
 }
 
 /* Media Queries für mobile Ansicht */
+@media (max-width: 991px) {
+    .header {
+        padding: 2rem 3%;
+    }
+}
+
 @media (max-width: 768px) {
     body {
         flex-direction: column;
@@ -534,13 +590,17 @@ form button:hover {
         margin: 10px;
     }
 
+    #menu-icon {
+        display: block;
+    }
+
     .navbar {
         position: absolute;
         top: 100%;
         left: -100%;
         width: 100%;
         padding: 1rem 4%;
-        background: var(--main-color);
+        background: var(--bg-color);
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
         z-index: 1;
         transition: .25s ease;
