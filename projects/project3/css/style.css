@@ -47,12 +47,15 @@ body {
 /* CSS to ensure the header stays at the top */
 /* Navbar and Dropdown Styles */
 .header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     padding: 2rem 9%;
     background: var(--bg-color);
+    /* background: rgba(243, 244, 246, 0.9); */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
     /* background: transparent; */
     display: flex;
     justify-content: space-between;
