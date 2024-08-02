@@ -581,7 +581,7 @@ h1 {
     font-size: 0.9rem; /* Even smaller for footnote */
     color: var(--main-color);
     margin-top: 18px;
-    line-height: .3;
+    /* line-height: .3; */
 }
 
 
