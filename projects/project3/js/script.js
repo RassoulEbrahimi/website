@@ -10,7 +10,8 @@ function calculateTax() {
         jahr: formData.get('jahr')
     };
 
-    fetch('https://steuertaxi.onrender.com/webhook', { // <-- Stelle sicher, dass dies zu /webhook zeigt, wie im Flask-Code definiert
+     // Stelle sicher, dass dies zu /webhook zeigt, wie im Flask-Code definiert 
+    fetch('https://steuertaxi.onrender.com/webhook', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -56,10 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // JavaScript to handle menu icon for mobile view
-const menuIcon = document.getElementById('menu-icon');
-const navbar = document.querySelector('.navbar');
+// const menuIcon = document.getElementById('menu-icon');
+// const navbar = document.querySelector('.navbar');
 
-menuIcon.addEventListener('click', () => {
-    navbar.classList.toggle('active');
-});
+// menuIcon.addEventListener('click', () => {
+//     navbar.classList.toggle('active');
+// });
 
