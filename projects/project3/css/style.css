@@ -542,7 +542,7 @@ h1 {
 .result-box {
     background-color: #ffffff;
     border-radius: 10px;
-    padding: 50px;
+    padding: 15px;
     box-shadow: 1px 0 8px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
     border: 1px solid #aaaaff;
@@ -758,7 +758,7 @@ form button:hover {
         left: 0;
         transition-delay: 0s;
     }
-    
+
     .navbar a {
         display: block;
         font-size: 2rem;
