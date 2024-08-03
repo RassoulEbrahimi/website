@@ -90,13 +90,8 @@ body {
 }
 
 .navbar {
-    position: fixed; /* Change from absolute to fixed */
+    position: relative;
     overflow: visible;
-}
-
-.navbar.active {
-    left: 0;
-    transition-delay: 0s;
 }
 
 .navbar a {
@@ -217,12 +212,11 @@ body {
 }
 
 #menu-icon {
-    display: block;
+    display: none;
     position: relative;
     font-size: 3.6rem;
     color: var(--text-color);
     cursor: pointer;
-    z-index: 1002; /* Add this line */
 }
 
 section {
