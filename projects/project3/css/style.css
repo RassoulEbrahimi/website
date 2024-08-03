@@ -56,20 +56,16 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    /* padding: 2rem 9%; */
-    padding: 1rem 5%;
-
-    /* background: var(--bg-color); */
     background: var(--second-bg-color);
-    /* background: rgba(243, 244, 246, 0.9); */
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
-    /* background: transparent; */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 5%;
+    z-index: 999; /* Ensure other elements do not interfere with the dropdown */
+    
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
-    z-index: 100; /* Ensure other elements do not interfere with the dropdown */
     overflow: visible; /* Ensure dropdown is not cut off */
 }
 
@@ -94,7 +90,13 @@ body {
 }
 
 .navbar {
-    position: relative;
+    position: fixed; /* Change from absolute to fixed */
+    overflow: visible;
+}
+
+.navbar.active {
+    left: 0;
+    transition-delay: 0s;
 }
 
 .navbar a {
@@ -189,7 +191,7 @@ body {
     visibility: hidden;
     left: 0;
     top: 100%; /* Ensure the dropdown appears below the button */
-    z-index: 10;
+    z-index: 200;
 
     /* z-index: 1000; Ensure the dropdown is above other elements */
 }
@@ -198,6 +200,7 @@ body {
     display: block;
     max-height: 250px;
     visibility: visible;
+    overflow: visible;
     z-index: 100; /* Ensure the dropdown is above other elements */
 }
 
@@ -214,11 +217,12 @@ body {
 }
 
 #menu-icon {
+    display: block;
     position: relative;
     font-size: 3.6rem;
     color: var(--text-color);
     cursor: pointer;
-    display: none;
+    z-index: 1002; /* Add this line */
 }
 
 section {
@@ -419,6 +423,8 @@ section {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
+    position: relative;
+    z-index: 1; /* Lower than header and navbar */
     /* display: grid; */
     /* grid-template-columns: 1fr 1fr; */
     gap: 2rem;
@@ -724,7 +730,7 @@ form button:hover {
 /* Ensure content is above the background */
 .header, section, footer {
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 /* Media Queries für mobile Ansicht */
@@ -790,7 +796,7 @@ form button:hover {
         padding: 1rem 4%;
         background: var(--bg-color);
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
-        z-index: 9;
+        z-index: 100;
         transition: .25s ease;
         transition-delay: .25s;
         flex-direction: column;
@@ -799,7 +805,7 @@ form button:hover {
     .navbar.active {
         left: 0;
         transition-delay: 0s;
-        z-index: 100; /* Ensure the active navbar has a higher z-index */
+        z-index: 1000; /* Add this line */
     }
 
     .navbar a {
