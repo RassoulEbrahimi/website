@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta name="description" content="Rassoul Ebrahimi - IT Specialist in Fulda, Germany. Expertise in IT support, system integration, and web design.">
@@ -25,36 +25,42 @@
         <div class="bx bx-menu" id="menu-icon"><span class="animate" style="--i:2;"></span></div>
 
         <nav class="navbar">
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#education">Education</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
+            <a href="#home" data-key="home" class="active">Startseite</a>
+            <a href="#about" data-key="about">Profil</a>
+            <a href="#education" data-key="education">Bildungsweg</a>
+            <a href="#skills" data-key="skills">Skills</a>
+            <a href="#contact" data-key="contact">Kontakt</a>
             <div class="dropdown">
-                <button class="dropbtn">Projects<i class="fa fa-caret-down"></i></button>
+                <button class="dropbtn">Projekte<i class="fa fa-caret-down"></i></button>
                 <div class="dropdown-content">
-                    <a href="https://rassoulebrahimi.github.io/website/projects/project1/project.html">Project #1</a>
-                    <a href="https://rassoulebrahimi.github.io/website/projects/project2/project.html">Project #2</a>
-                    <a href="https://rassoulebrahimi.github.io/website/projects/project3/project.html">Project #3</a>
+                    <a href="https://rassoulebrahimi.github.io/website/projects/project1/project.html">Projekt #1</a>
+                    <a href="https://rassoulebrahimi.github.io/website/projects/project2/project.html">Projekt #2</a>
+                    <a href="https://rassoulebrahimi.github.io/website/projects/project3/project.html">Projekt #3</a>
                 </div>
             </div>
 
             <span class="active-nav"></span>
             <span class="animate" style="--i:2;"></span>
+        
+            <button id="langToggle" class="lang-toggle" aria-label="Toggle language">
+                <span class="lang-option" data-lang="en">EN</span>
+                <span class="lang-separator">|</span>
+                <span class="lang-option active" data-lang="de">DE</span>
+            </button>
         </nav>
     </header>
 
     <!-- home section design -->
     <section class="home show-animate" id="home">
         <div class="home-content">
-            <h1>Hi, I'm <span>Rassoul Ebrahimi</span><span class="animate" style="--i:2;"></span></h1>
+            <h1>Hallo, ich bin <span>Rassoul Ebrahimi</span><span class="animate" style="--i:2;"></span></h1>
             <div class="text-animate">
-                <h3>IT Specialist</h3>
-                <h3>Web Designer</h3>
-                <h3><nobr>Support Professional</nobr></h3>
+                <h3>IT-Spezialist</h3>
+                <h3>Webdesigner</h3>
+                <h3>IT Support-Profi</h3>
                 <span class="animate" style="--i:3;"></span>
             </div>
-            <p>Experienced IT specialist with a focus on first-level support, IT assistance, and web design. Seeking opportunities to contribute my skills in technical troubleshooting, system integration, and customer support.
+            <p>Erfahrener IT-Spezialist mit Schwerpunkt auf First-Level-Support, IT-Unterstützung und Webdesign. Ich suche nach Möglichkeiten, meine Fähigkeiten in technischer Fehlerbehebung, Systemintegration und Kundensupport einzubringen.
                 <span class="animate" style="--i:4;"></span>
             </p>
 
@@ -78,7 +84,7 @@
 
     <!-- about section design -->
     <section class="about" id="about">
-        <h2 class="heading">About <span>Me</span><span class="animate scroll" style="--i:1;"></span></h2>
+        <h2 class="heading">Über <span>Mich</span><span class="animate scroll" style="--i:1;"></span></h2>
 
         <div class="about-img">
             <img src="images/about.jpg" alt="Rassoul Ebrahimi - IT Specialist">
@@ -87,9 +93,10 @@
         </div>
 
         <div class="about-content">
-            <h3>IT Support & Web Design Specialist<span class="animate scroll" style="--i:3;"></span></h3>
-            <!-- <p>As a seasoned IT specialist, I have honed my skills in various technical and customer support roles. My expertise includes troubleshooting, system setup, network management, and user training. I thrive in dynamic environments and am always eager to take on new challenges. <span class="animate scroll" style="--i:4;"></span></p> -->
-            <p>With over 5 years of experience in IT, I specialize in providing exceptional first-level support, system integration, and creating user-friendly web designs. My expertise includes technical troubleshooting and problem-solving, customer support and communication, network administration and system integration, web design and development using HTML, CSS, and JavaScript, as well as proficiency in German and English for effective communication.<span class="animate scroll" style="--i:4;"></span></p>
+            <h3>IT-Supporter & Webdesigner<span class="animate scroll" style="--i:3;"></span></h3>
+            <p>Als erfahrener IT-Spezialist habe ich meine Fähigkeiten in verschiedenen technischen und Kundensupport-Rollen geschärft. Meine Expertise umfasst Fehlerbehebung, Systemeinrichtung, Netzwerkmanagement und Benutzerschulung. Ich gedeihe in dynamischen Umgebungen und bin stets bereit, neue Herausforderungen anzunehmen.
+                <span class="animate show-animate" style="--i:3;"></span>
+            </p>
             <div class="btn-box btns">
                 <a href="#" class="btn">Read More</a>
                 <span class="animate scroll" style="--i:5;"></span>
@@ -99,7 +106,7 @@
 
     <!-- education section design -->
     <section class="education" id="education">
-        <h2 class="heading">My <span>Journey</span><span class="animate scroll" style="--i:1;"></span></h2>
+        <h2 class="heading">Mein <span>Werdegang</span><span class="animate scroll" style="--i:1;"></span></h2>
 
         <div class="education-row">
             <div class="education-column">
@@ -317,16 +324,16 @@
 
     <!-- contact section design -->
     <section class="contact" id="contact">
-        <h2 class="heading">Contact <span>Me!</span><span class="animate scroll" style="--i:1;"></span></h2>
+        <h2 class="heading">Kontaktieren <span>Sie mich!</span><span class="animate scroll" style="--i:1;"></span></h2>
 
         <form action="#">
             <div class="input-box">
                 <div class="input-field">
-                    <input type="text" placeholder="Full Name" required>
+                    <input type="text" placeholder="Ihr Name" required>
                     <span class="focus"></span>
                 </div>
                 <div class="input-field">
-                    <input type="text" placeholder="Email Address" required>
+                    <input type="text" placeholder="Ihre E-Mail" required>
                     <span class="focus"></span>
                 </div>
 
@@ -335,11 +342,11 @@
 
             <div class="input-box">
                 <div class="input-field">
-                    <input type="number" placeholder="Mobile Number" required>
+                    <input type="number" placeholder="Mobilnummer" required>
                     <span class="focus"></span>
                 </div>
                 <div class="input-field">
-                    <input type="text" placeholder="Email Subject" required>
+                    <input type="text" placeholder="Betreff" required>
                     <span class="focus"></span>
                 </div>
 
@@ -347,14 +354,14 @@
             </div>
 
             <div class="textarea-field">
-                <textarea name="" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
+                <textarea name="" id="" cols="30" rows="10" placeholder="Ihre Nachricht" required></textarea>
                 <span class="focus"></span>
 
                 <span class="animate scroll" style="--i:7;"></span>
             </div>
 
             <div class="btn-box btns">
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn">Nachricht senden</button>
 
                 <span class="animate scroll" style="--i:9;"></span>
             </div>
