@@ -818,6 +818,7 @@ span {
     height: 100%;
     background: var(--bg-color);
     z-index: 98;
+    animation: animate 4s linear infinite;
 }
 
 .animate.home-img {
@@ -1049,6 +1050,18 @@ section:nth-child(odd) .animate.scroll,
 
 
 /* KEYFRAMES ANIMATION */
+@keyframes animate {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 @keyframes homeBgText {
 
     0%,
