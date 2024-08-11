@@ -1,0 +1,43 @@
+6,021 tokens
+GPT-3.5-turbo-0125
+
+
+
+
+
+
+10 Aug
+6,021 tokens
+
+Context tokens			4,103 tokens			$ 0,0020515
+Generated tokens			1,918 tokens			$ 2,877
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=======================================================
+
+					Input/1M Tokens			Output/1M Tokens	
+gpt-3.5-turbo-0125	$0.50 / 1M tokens			$1.50 / 1M tokens
+
+=======================================================
+
+
+Save 50% with Batch API
+					Input/1M Tokens			Output/1M Tokens	
+gpt-3.5-turbo-0125	$0.25 / 1M tokens			$0.75 / 1M tokens
+
+
+
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=======================================================
+
+				Input/1k Tokens					Output/1k Tokens	
+GPT-3.5 Turbo	$0.0005							$0.0015	
+
+
+
+

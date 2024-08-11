@@ -40,15 +40,38 @@
             <div class="project-description">
                 <h2>Bewerbung Generator</h2>
                 <p>Erstellen Sie Ihre maßgeschneiderte Bewerbung mit Hilfe von KI</p>
-                <form id="upload-form">
-                    <div>
-                        <label for="lebenslauf">Lebenslauf (PDF oder DOCX):</label>
-                        <input type="file" id="lebenslauf" name="lebenslauf" accept=".pdf,.docx" required>
+ 
+                <div class="input-toggle">
+                    <button id="toggle-file" class="btn active">Datei hochladen</button>
+                    <button id="toggle-text" class="btn">Text eingeben</button>
+                </div>
+                           
+                <form id="upload-form" enctype="multipart/form-data">
+                    <div id="file-inputs">
+                        <div class="file-input-container">
+                            <label for="lebenslauf">Lebenslauf (PDF, DOCX oder TXT):</label>
+                            <input type="file" id="lebenslauf" name="lebenslauf" accept=".pdf,.docx,.txt">
+                        </div>
+            
+                        <div class="file-input-container">
+                            <label for="jobbeschreibung">Jobbeschreibung (PDF, DOCX oder TXT):</label>
+                            <input type="file" id="jobbeschreibung" name="jobbeschreibung" accept=".pdf,.docx,.txt">
+                        </div>
                     </div>
-                    <div>
-                        <label for="jobbeschreibung">Jobbeschreibung (PDF oder DOCX):</label>
-                        <input type="file" id="jobbeschreibung" name="jobbeschreibung" accept=".pdf,.docx" required>
+
+                    <div id="text-inputs" style="display: none;">
+                        <div class="text-input-container">
+                            <label for="lebenslauf-text">Lebenslauf (Text):</label>
+                            <textarea id="lebenslauf-text" name="lebenslauf-text" rows="10" placeholder="Fügen Sie hier Ihren Lebenslauf ein"></textarea>
+                        </div>
+            
+                        <div class="text-input-container">
+                            <label for="jobbeschreibung-text">Jobbeschreibung (Text):</label>
+                            <textarea id="jobbeschreibung-text" name="jobbeschreibung-text" rows="10" placeholder="Fügen Sie hier Ihre Jobbeschreibung ein"></textarea>
+                        </div>
                     </div>
+
+
                     <div class="btn-box">
                         <button type="submit" class="btn">Bewerbung generieren</button>
                     </div>
@@ -56,6 +79,7 @@
                 <div id="result-section" style="display: none;">
                     <h3>Ihre generierte Bewerbung</h3>
                     <div id="generated-content"></div>
+                    <div id="cost-info"></div>
                     <div class="btn-box">
                         <a href="#" class="btn" id="download-pdf">Als PDF herunterladen</a>
                         <a href="#" class="btn" id="download-docx">Als DOCX herunterladen</a>
