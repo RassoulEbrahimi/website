@@ -1,3 +1,4 @@
+import re
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
@@ -7,7 +8,6 @@ import logging
 import time
 from datetime import datetime
 from functools import wraps
-import re
 import tiktoken
 from tenacity import retry, stop_after_attempt, wait_exponential
 
@@ -79,39 +79,57 @@ def call_openai_api(prompt):
         logging.error(f"Error calling OpenAI API: {str(e)}")
         raise
 
-def format_bewerbung(bewerbung):
-    current_date = datetime.now().strftime('%d.%m.%Y')
-    header = f"""
-        Anna Müller
-        Musterstraße 12
-        12345 Musterstadt
+def extract_key_information(lebenslauf, stellenanzeige):
+    info = {
+        "applicant_name": "",
+        "applicant_address": "",
+        "job_position": "",
+        "company_name": "",
+        "company_address": "",
+        "requirements": [],
+        "responsibilities": []
+    }
 
-        Deutsche Post DHL Group
-        Musterstraße 1
-        12345 Musterstadt
+    # Extract applicant's name and address from Lebenslauf
+    lebenslauf_lines = lebenslauf.split('\n')
+    info["applicant_name"] = lebenslauf_lines[0].strip()
+    info["applicant_address"] = "\n".join(lebenslauf_lines[1:4]).strip()
 
-        Musterstadt, {current_date}
+    # Extract job position and company name from Stellenanzeige
+    position_match = re.search(r'Stellenanzeige:\s*([\w\s]+)\s*\(m/w/d\)', stellenanzeige)
+    if position_match:
+        info["job_position"] = position_match.group(1).strip()
 
-        Bewerbung als Paketbotin (m/w/d)
+    company_match = re.search(r'Unternehmen:\s*([\w\s]+)', stellenanzeige)
+    if company_match:
+        info["company_name"] = company_match.group(1).strip()
 
-    """
-    # Remove any existing header information from the generated text
-    bewerbung_lines = bewerbung.split('\n')
-    start_index = next((i for i, line in enumerate(bewerbung_lines) if "Sehr geehrte" in line), 0)
-    formatted_bewerbung = '\n'.join(bewerbung_lines[start_index:])
-    
-    # Combine the header with the formatted bewerbung
-    full_bewerbung = header + formatted_bewerbung
+    # Extract company address
+    address_match = re.search(r'([\w\s]+\n\d{5}\s*[\w\s]+)', stellenanzeige)
+    if address_match:
+        info["company_address"] = address_match.group(1).strip()
 
-    # Ensure there's only one closing
-    if full_bewerbung.count("Mit freundlichen Grüßen") > 1:
-        full_bewerbung = full_bewerbung.rsplit("Mit freundlichen Grüßen", 1)[0] + "Mit freundlichen Grüßen\n\nAnna Müller"
-    
-    return full_bewerbung.strip()
+    # Extract requirements and responsibilities
+    req_section = re.search(r'Ihr Profil:(.*?)(?=Wir bieten:|$)', stellenanzeige, re.DOTALL)
+    if req_section:
+        info["requirements"] = [req.strip() for req in req_section.group(1).split('\n') if req.strip()]
+
+    resp_section = re.search(r'Aufgaben:(.*?)(?=Ihr Profil:|$)', stellenanzeige, re.DOTALL)
+    if resp_section:
+        info["responsibilities"] = [resp.strip() for resp in resp_section.group(1).split('\n') if resp.strip()]
+
+    return info
 
 def generate_bewerbung(lebenslauf, stellenanzeige):
+    info = extract_key_information(lebenslauf, stellenanzeige)
+    
     prompt = f"""
     Erstellen Sie ein professionelles Bewerbungsanschreiben auf Deutsch basierend auf folgendem Lebenslauf und der Stellenanzeige:
+
+    Bewerber: {info['applicant_name']}
+    Position: {info['job_position']}
+    Unternehmen: {info['company_name']}
+    Adresse: {info['company_address']}
 
     Lebenslauf:
     {lebenslauf}
@@ -119,16 +137,22 @@ def generate_bewerbung(lebenslauf, stellenanzeige):
     Stellenanzeige:
     {stellenanzeige}
 
-        Das Anschreiben sollte folgende Punkte enthalten:
-        1. Anrede
-        2. Einleitung mit Bezug auf die Stelle
-        3. 2-3 Absätze zu relevanten Qualifikationen und Erfahrungen
-        4. Abschluss mit Gesprächswunsch
-        5. Grußformel
+    Anforderungen:
+    {', '.join(info['requirements'])}
 
-        Bitte verwenden Sie durchgehend die "Ich"-Form und vermeiden Sie Platzhaltertexte.
-        Das Anschreiben sollte nicht länger als 500 Wörter sein.
-        Beginnen Sie direkt mit "Sehr geehrte Damen und Herren," ohne vorherige Adressinformationen oder Überschriften.
+    Aufgaben:
+    {', '.join(info['responsibilities'])}
+
+    Das Anschreiben sollte folgende Punkte enthalten:
+    1. Anrede (falls ein Ansprechpartner bekannt ist, ansonsten "Sehr geehrte Damen und Herren,")
+    2. Einleitung mit Bezug auf die Stelle
+    3. 2-3 Absätze zu relevanten Qualifikationen und Erfahrungen, die auf die Anforderungen und Aufgaben eingehen
+    4. Abschluss mit Gesprächswunsch
+    5. Grußformel
+
+    Bitte verwenden Sie durchgehend die "Ich"-Form und vermeiden Sie Platzhaltertexte.
+    Das Anschreiben sollte nicht länger als 500 Wörter sein.
+    Beginnen Sie direkt mit der Anrede, ohne vorherige Adressinformationen oder Überschriften.
     """
 
     prompt_tokens = num_tokens_from_string(prompt, "cl100k_base")
@@ -145,7 +169,7 @@ def generate_bewerbung(lebenslauf, stellenanzeige):
         logging.info(f"Tokens used: {total_tokens} (Prompt: {prompt_tokens}, Completion: {completion_tokens})")
         logging.info(f"Estimated cost: ${cost:.6f}")
         
-        formatted_bewerbung = format_bewerbung(bewerbung)
+        formatted_bewerbung = format_bewerbung(bewerbung, info)
         
         # Add cost information to the formatted bewerbung
         formatted_bewerbung += f"\n\nGeschätzte Kosten für diese Bewerbung: ${cost:.6f}"
@@ -155,6 +179,28 @@ def generate_bewerbung(lebenslauf, stellenanzeige):
         error_message = f"Es ist ein Fehler bei der Generierung des Anschreibens aufgetreten: {str(e)}"
         logging.error(error_message)
         return None, error_message, None
+
+def format_bewerbung(bewerbung, info):
+    current_date = datetime.now().strftime('%d.%m.%Y')
+    header = f"""{info['applicant_name']}
+{info['applicant_address']}
+
+{info['company_name']}
+{info['company_address']}
+
+{current_date}
+
+Bewerbung als {info['job_position']}
+
+"""
+    # Combine the header with the formatted bewerbung
+    full_bewerbung = header + bewerbung
+
+    # Ensure there's only one closing
+    if full_bewerbung.count("Mit freundlichen Grüßen") > 1:
+        full_bewerbung = full_bewerbung.rsplit("Mit freundlichen Grüßen", 1)[0] + "Mit freundlichen Grüßen\n\n" + info['applicant_name']
+    
+    return full_bewerbung.strip()
 
 @app.route('/generate_bewerbung', methods=['POST'])
 def api_generate_bewerbung():

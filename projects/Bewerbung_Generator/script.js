@@ -10,8 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultSection = document.getElementById('result-section');
     const generatedContent = document.getElementById('generated-content');
     const costInfo = document.getElementById('cost-info');
+    const resultButtons = document.querySelectorAll('.result-btn');
     const downloadPdfBtn = document.getElementById('download-pdf');
     const downloadDocxBtn = document.getElementById('download-docx');
+    const downloadTextBtn = document.getElementById('download-text');
+    const copyTextBtn = document.getElementById('copy-text');
 
     // Toggle between file and text inputs
     toggleFileBtn.addEventListener('click', function() {
@@ -27,6 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
         toggleFileBtn.classList.remove('active');
         toggleTextBtn.classList.add('active');
     });
+
+    // Set "Text eingeben" as default
+    toggleTextBtn.click();
 
     // Function to validate file type
     function validateFileType(file, allowedTypes) {
@@ -65,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Form submission
+    // Modify the form submission to include smooth scrolling
     uploadForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -94,6 +100,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
         }
+        try {
+            // ... (existing code for API call and response handling) ...
+
+            // Show the result section
+            resultSection.style.display = 'block';
+
+            // Smooth scroll to the result section
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+
+            // Show result buttons
+            resultButtons.forEach(btn => {
+                btn.style.display = 'block';
+            });
+
+        } catch (error) {
+            console.error('Error:', error);
+            generatedContent.innerHTML = '<p>Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.</p>';
+        }
 
         // Show loading indicator
         generatedContent.innerHTML = '<p>Ihre Bewerbung wird generiert... Bitte warten Sie.</p>';
@@ -114,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const data = await response.json();
             
+            // In the part where you handle the API response
             generatedContent.innerHTML = `<pre>${data.bewerbung}</pre>`;
             costInfo.textContent = `Geschätzte Kosten: ${data.estimated_cost}`;
             
@@ -138,5 +163,29 @@ document.addEventListener('DOMContentLoaded', function() {
     downloadDocxBtn.addEventListener('click', function(e) {
         e.preventDefault();
         alert('DOCX-Download-Funktion wird implementiert.');
+    });
+
+    // Copy to clipboard functionality
+    copyTextBtn.addEventListener('click', function() {
+        const textToCopy = generatedContent.textContent;
+        navigator.clipboard.writeText(textToCopy).then(function() {
+            alert('Text wurde in die Zwischenablage kopiert!');
+        }, function(err) {
+            console.error('Fehler beim Kopieren des Textes: ', err);
+        });
+    });
+
+    // Download as text file functionality
+    downloadTextBtn.addEventListener('click', function() {
+        const text = generatedContent.textContent;
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Bewerbung.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     });
 });
