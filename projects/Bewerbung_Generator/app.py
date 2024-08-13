@@ -216,14 +216,5 @@ def api_generate_bewerbung():
         return jsonify({"error": error}), 500
     return jsonify({"bewerbung": bewerbung, "estimated_cost": f"${cost:.6f}"})
 
-@app.route('/test_key', methods=['GET'])
-def test_key():
-    api_key = os.getenv('OPENAI_API_KEY')
-    if not api_key:
-        return jsonify({"error": "API-Schlüssel nicht in Umgebungsvariablen gefunden"}), 500
-    
-    masked_key = api_key[:4] + '*' * (len(api_key) - 8) + api_key[-4:]
-    return jsonify({"message": f"API-Schlüssel gefunden: {masked_key}"}), 200
-
 if __name__ == '__main__':
     app.run(debug=True)
