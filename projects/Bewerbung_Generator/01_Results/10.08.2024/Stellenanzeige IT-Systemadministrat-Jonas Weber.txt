@@ -1,0 +1,40 @@
+Stellenanzeige: IT-Systemadministrator (m/w/d)
+Unternehmen:
+NextGen IT Solutions GmbH
+Innovationsstraße 7
+45127 Essen, Deutschland
+
+Über uns:
+NextGen IT Solutions GmbH ist ein führendes Unternehmen im Bereich IT-Dienstleistungen und spezialisiert auf die Bereitstellung von maßgeschneiderten IT-Infrastrukturlösungen für mittelständische Unternehmen. Unser Fokus liegt auf der Planung, Implementierung und Wartung komplexer IT-Systeme sowie der Entwicklung von innovativen Cloud-Lösungen.
+
+Stellenbeschreibung:
+Wir suchen einen engagierten IT-Systemadministrator (m/w/d), der unser Team verstärkt. Sie sind verantwortlich für die Betreuung unserer IT-Infrastruktur und sorgen für einen reibungslosen Betrieb unserer Systeme.
+
+Aufgaben:
+
+Verwaltung und Wartung von Server- und Netzwerksystemen (Windows/Linux)
+Betreuung von virtualisierten Umgebungen (VMware, Hyper-V)
+Administration von Cloud-Lösungen (z.B. AWS, Azure)
+Monitoring und Optimierung der Systemperformance
+Planung und Umsetzung von Sicherheitsmaßnahmen zur Gewährleistung der IT-Sicherheit
+Benutzerverwaltung und Rechtevergabe in Active Directory
+Unterstützung des IT-Support-Teams bei komplexen Problemen
+Dokumentation von Systemänderungen und Prozessen
+Ihr Profil:
+
+Abgeschlossene Ausbildung zum Fachinformatiker für Systemintegration oder eine vergleichbare Qualifikation
+Mehrjährige Erfahrung in der Administration von Windows- und Linux-Servern
+Fundierte Kenntnisse in der Virtualisierung und Cloud-Administration
+Erfahrung in der Netzwerkadministration und IT-Sicherheit
+Sehr gute Kenntnisse in Active Directory und Windows Server
+Zertifizierungen im Bereich IT-Sicherheit oder Cloud-Technologien von Vorteil
+Hohe Problemlösungskompetenz und analytisches Denken
+Gute Deutsch- und Englischkenntnisse in Wort und Schrift
+Wir bieten:
+
+Ein dynamisches und innovatives Arbeitsumfeld
+Weiterbildungs- und Entwicklungsmöglichkeiten
+Flexible Arbeitszeiten und Homeoffice-Optionen
+Attraktives Gehaltspaket und Sozialleistungen
+Bewerbung:
+Bitte senden Sie Ihre Bewerbungsunterlagen an: karriere@nextgen-it.de

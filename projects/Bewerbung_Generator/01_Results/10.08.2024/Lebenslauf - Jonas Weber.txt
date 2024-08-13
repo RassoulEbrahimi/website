@@ -1,0 +1,60 @@
+Lebenslauf des Bewerbers
+Name:
+Jonas Weber
+Adresse:
+Gutenbergstraße 12
+45127 Essen, Deutschland
+Telefon:
++49 176 9876543
+E-Mail:
+jonas.weber@example.com
+Geburtsdatum:
+18.03.1990
+
+Berufserfahrung
+IT-Systemadministrator
+MediTech GmbH, Essen
+Juni 2020 – August 2024
+
+Administration und Wartung der IT-Infrastruktur, einschließlich Windows- und Linux-Servern.
+Betreuung von virtualisierten Umgebungen (VMware) und Cloud-Services (Azure).
+Implementierung und Überwachung von IT-Sicherheitsmaßnahmen, einschließlich Firewall-Konfiguration und Backup-Lösungen.
+Netzwerkadministration, einschließlich VLAN-Management und VPN-Einrichtung.
+Unterstützung des IT-Supports bei der Fehlerbehebung komplexer IT-Probleme.
+Planung und Durchführung von Systemupgrades und -migrationen.
+Dokumentation von Systemkonfigurationen und IT-Prozessen.
+IT-Support Specialist
+TechnoSoft Solutions, Duisburg
+August 2016 – Mai 2020
+
+Bereitstellung von 1st und 2nd Level Support für interne und externe Kunden.
+Installation und Konfiguration von Hardware und Software in einer Windows-Umgebung.
+Verwaltung von Benutzerkonten und Zugriffsrechten in Active Directory.
+Durchführung von Schulungen für Endanwender zur Nutzung von IT-Systemen.
+Unterstützung bei der Netzwerkadministration und Wartung von Serversystemen.
+Ausbildung
+Fachinformatiker für Systemintegration
+Berufsschule Essen-West
+August 2013 – Juli 2016
+
+Schwerpunkt: Netzwerkadministration, Server-Management, IT-Sicherheit
+Abschlussnote: 1,7
+Zertifikate
+Microsoft Certified: Azure Administrator Associate – 2023
+VMware Certified Professional (VCP) – 2022
+CompTIA Security+ – 2021
+IT-Kenntnisse
+Betriebssysteme: Windows Server, Linux (Ubuntu, CentOS)
+Virtualisierung: VMware, Hyper-V
+Cloud-Technologien: Azure, AWS
+Netzwerktechnik: VLAN, VPN, Firewall-Konfiguration
+Datenbanken: MySQL, SQL Server
+Sicherheitslösungen: Antivirus, Backup & Recovery, Firewalls
+Tools: Active Directory, PowerShell, Bash, Ansible
+Sprachkenntnisse
+Deutsch: Muttersprache
+Englisch: Fließend (C1)
+Hobbys
+IT-Sicherheit und Ethical Hacking
+Laufen und Fitness
+Lesen von Fachliteratur zu neuen IT-Trends
