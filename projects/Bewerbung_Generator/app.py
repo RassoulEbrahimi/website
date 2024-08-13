@@ -1,51 +1,50 @@
 import re
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 import os
-from dotenv import load_dotenv
-from openai import OpenAI
 import logging
 import time
 from datetime import datetime
 from functools import wraps
+
 import tiktoken
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from dotenv import load_dotenv
+from openai import OpenAI
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-logging.basicConfig(level=logging.DEBUG)
-
+# Load environment variables
 load_dotenv()
 
-app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-# Set up OpenAI client
+# Initialize Flask app
+app = Flask(__name__)
+CORS(app)
+
+# Initialize OpenAI client
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
-# Function to calculate the cost based on token usage
 def calculate_cost(input_tokens, output_tokens, model="gpt-3.5-turbo-0125", is_batch=False):
-    # Pricing per 1M tokens
-    input_price = 0.50  # $0.50 per 1M input tokens
-    output_price = 1.50  # $1.50 per 1M output tokens
+    input_price = 0.50
+    output_price = 1.50
     
-    # Convert to millions of tokens
     input_millions = input_tokens / 1_000_000
     output_millions = output_tokens / 1_000_000
     
-    # Calculate cost
-    input_cost = input_millions * input_price
-    output_cost = output_millions * output_price
-    total_cost = input_cost + output_cost
+    total_cost = (input_millions * input_price) + (output_millions * output_price)
     
-    # Apply batch discount if applicable (not used in current implementation)
     if is_batch:
-        total_cost *= 0.5  # 50% discount for batch processing
+        total_cost *= 0.5
     
     return total_cost
 
 def rate_limit(max_per_minute):
     min_interval = 60.0 / max_per_minute
+    last_called = [0.0]
+    
     def decorator(func):
-        last_called = [0.0]
         @wraps(func)
         def wrapper(*args, **kwargs):
             elapsed = time.time() - last_called[0]
@@ -58,10 +57,9 @@ def rate_limit(max_per_minute):
         return wrapper
     return decorator
 
-def num_tokens_from_string(string: str, encoding_name: str) -> int:
+def num_tokens_from_string(string: str, encoding_name: str = "cl100k_base") -> int:
     encoding = tiktoken.get_encoding(encoding_name)
-    num_tokens = len(encoding.encode(string))
-    return num_tokens
+    return len(encoding.encode(string))
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
 def call_openai_api(prompt):
@@ -76,7 +74,7 @@ def call_openai_api(prompt):
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
-        logging.error(f"Error calling OpenAI API: {str(e)}")
+        logger.error(f"Error calling OpenAI API: {str(e)}")
         raise
 
 def extract_key_information(lebenslauf, stellenanzeige):
@@ -90,12 +88,10 @@ def extract_key_information(lebenslauf, stellenanzeige):
         "responsibilities": []
     }
 
-    # Extract applicant's name and address from Lebenslauf
     lebenslauf_lines = lebenslauf.split('\n')
     info["applicant_name"] = lebenslauf_lines[0].strip()
     info["applicant_address"] = "\n".join(lebenslauf_lines[1:4]).strip()
 
-    # Extract job position and company name from Stellenanzeige
     position_match = re.search(r'Stellenanzeige:\s*([\w\s]+)\s*\(m/w/d\)', stellenanzeige)
     if position_match:
         info["job_position"] = position_match.group(1).strip()
@@ -104,12 +100,10 @@ def extract_key_information(lebenslauf, stellenanzeige):
     if company_match:
         info["company_name"] = company_match.group(1).strip()
 
-    # Extract company address
     address_match = re.search(r'([\w\s]+\n\d{5}\s*[\w\s]+)', stellenanzeige)
     if address_match:
         info["company_address"] = address_match.group(1).strip()
 
-    # Extract requirements and responsibilities
     req_section = re.search(r'Ihr Profil:(.*?)(?=Wir bieten:|$)', stellenanzeige, re.DOTALL)
     if req_section:
         info["requirements"] = [req.strip() for req in req_section.group(1).split('\n') if req.strip()]
@@ -155,29 +149,26 @@ def generate_bewerbung(lebenslauf, stellenanzeige):
     Beginnen Sie direkt mit der Anrede, ohne vorherige Adressinformationen oder Überschriften.
     """
 
-    prompt_tokens = num_tokens_from_string(prompt, "cl100k_base")
+    prompt_tokens = num_tokens_from_string(prompt)
     
     try:
         bewerbung = call_openai_api(prompt)
         
-        completion_tokens = num_tokens_from_string(bewerbung, "cl100k_base")
+        completion_tokens = num_tokens_from_string(bewerbung)
         total_tokens = prompt_tokens + completion_tokens
         
-        # Calculate the cost
         cost = calculate_cost(prompt_tokens, completion_tokens)
         
-        logging.info(f"Tokens used: {total_tokens} (Prompt: {prompt_tokens}, Completion: {completion_tokens})")
-        logging.info(f"Estimated cost: ${cost:.6f}")
+        logger.info(f"Tokens used: {total_tokens} (Prompt: {prompt_tokens}, Completion: {completion_tokens})")
+        logger.info(f"Estimated cost: ${cost:.6f}")
         
         formatted_bewerbung = format_bewerbung(bewerbung, info)
-        
-        # Add cost information to the formatted bewerbung
         formatted_bewerbung += f"\n\nGeschätzte Kosten für diese Bewerbung: ${cost:.6f}"
         
         return formatted_bewerbung, None, cost
     except Exception as e:
         error_message = f"Es ist ein Fehler bei der Generierung des Anschreibens aufgetreten: {str(e)}"
-        logging.error(error_message)
+        logger.error(error_message)
         return None, error_message, None
 
 def format_bewerbung(bewerbung, info):
@@ -193,16 +184,15 @@ def format_bewerbung(bewerbung, info):
 Bewerbung als {info['job_position']}
 
 """
-    # Combine the header with the formatted bewerbung
     full_bewerbung = header + bewerbung
 
-    # Ensure there's only one closing
     if full_bewerbung.count("Mit freundlichen Grüßen") > 1:
         full_bewerbung = full_bewerbung.rsplit("Mit freundlichen Grüßen", 1)[0] + "Mit freundlichen Grüßen\n\n" + info['applicant_name']
     
     return full_bewerbung.strip()
 
 @app.route('/generate_bewerbung', methods=['POST'])
+@rate_limit(max_per_minute=10)
 def api_generate_bewerbung():
     data = request.json
     lebenslauf = data.get('lebenslauf', '')
@@ -217,4 +207,4 @@ def api_generate_bewerbung():
     return jsonify({"bewerbung": bewerbung, "estimated_cost": f"${cost:.6f}"})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
